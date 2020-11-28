@@ -6,22 +6,24 @@
 package ObjetosNegocio;
 
 
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Date;
 import java.util.Objects;
 import org.bson.types.ObjectId;
 
-/**
- *
- * @author Citlali Orduño
- */
+
 public class Usuario {
     private ObjectId id;
     private String nombre;
     private String contraseña;
     private int edad;
     private String sexo;
-    private Date fechaNacimiento;
+    private LocalDate fechaNacimiento;
     private List<String> generosPeliculas;
     private List<String> generosMusica;
     private List<Publicacion> publicaciones; 
@@ -29,9 +31,8 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Usuario(String nombre, String contraseña, int edad, String sexo,
-            Date fechaNacimiento, List<String> generosPeliculas,
-            List<String> generosMusica, List<Publicacion> publicaciones) {
+    public Usuario(String nombre, String contraseña, String sexo,LocalDate fechaNacimiento, 
+            List<String> generosPeliculas, List<String> generosMusica, List<Publicacion> publicaciones) {
         this.nombre = nombre;
         this.contraseña = contraseña;
         this.edad = edad;
@@ -42,8 +43,17 @@ public class Usuario {
         this.publicaciones= publicaciones;
     }
 
+    public Usuario(String nombre, String contraseña, String sexo, LocalDate fechaNacimiento) {
+        this.nombre = nombre;
+        this.contraseña = contraseña;
+        this.edad = edad;
+        this.sexo = sexo;
+        this.fechaNacimiento = fechaNacimiento;
+    }
+    
+
     public Usuario(ObjectId id, String nombre, String contraseña, int edad, 
-            String sexo, Date fechaNacimiento, List<String> generosPeliculas, 
+            String sexo, LocalDate fechaNacimiento, List<String> generosPeliculas, 
             List<String> generosMusica, List<Publicacion> publicaciones) {
         this.id = id;
         this.nombre = nombre;
@@ -81,6 +91,9 @@ public class Usuario {
     }
 
     public int getEdad() {
+        LocalDate fechaActual= LocalDate.now();
+        Period age= Period.between(fechaNacimiento, fechaActual);
+        edad= age.getYears();
         return edad;
     }
 
@@ -96,11 +109,11 @@ public class Usuario {
         this.sexo = sexo;
     }
 
-    public Date getFechaNacimiento() {
+    public LocalDate getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(Date fechaNacimiento) {
+    public void setFechaNacimiento(LocalDate fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 
@@ -128,8 +141,6 @@ public class Usuario {
         this.publicaciones = publicaciones;
     }
     
-    
-
     @Override
     public int hashCode() {
         int hash = 3;

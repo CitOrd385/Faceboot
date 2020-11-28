@@ -5,6 +5,16 @@
  */
 package faceboot;
 
+import ObjetosNegocio.Usuario;
+import com.mongodb.MongoClient;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.Month;
+import java.util.Date;
+import org.bson.Document;
+
 /**
  *
  * @author Citlali Orduño
@@ -15,7 +25,31 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+      
+        //Cliente mongo - persistence manager factory 
+       MongoClient clienteMongo = new MongoClient("localhost",27017);
+       
+       //Acceso a la base de datos 
+       MongoDatabase bd = clienteMongo.getDatabase("Faceboot");
+       
+       //Acceso a la colección que se desee modificar
+       MongoCollection<Document> coleccion = bd.getCollection("usuarios");
+       
+       LocalDate fechaNacimiento= LocalDate.of(1999, 02, 02);
+       Document documento= new Document();
+       documento.append("nombre","el joel lokillo").
+                 append("contraseña","lokillojoel").
+                 append("sexo", "hombre").
+               append("fechaNacimiento",fechaNacimiento);
+       
+      // coleccion.insertOne(documento);
+       
+       Usuario usuario= new Usuario("Tiffany", "rosiefabuloli", "mujer", fechaNacimiento);
+       
+       // System.out.println(usuario.getEdad());
+       
+       
+       
     }
     
 }
