@@ -5,6 +5,7 @@
  */
 package ObjetosNegocio;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Objects;
 import org.bson.types.ObjectId;
@@ -13,19 +14,19 @@ import org.bson.types.ObjectId;
 public class Comentario {
     private ObjectId id;
     private Usuario usuario;
-    private Date fechaHora;
+    private LocalDateTime fechaHora;
     private String mensaje;
 
     public Comentario() {
     }
 
-    public Comentario(Usuario usuario, Date fechaHora, String mensaje) {
+    public Comentario(Usuario usuario, LocalDateTime fechaHora, String mensaje) {
         this.usuario = usuario;
         this.fechaHora = fechaHora;
         this.mensaje = mensaje;
     }
 
-    public Comentario(ObjectId id, Usuario usuario, Date fechaHora, String mensaje) {
+    public Comentario(ObjectId id, Usuario usuario, LocalDateTime fechaHora, String mensaje) {
         this.id = id;
         this.usuario = usuario;
         this.fechaHora = fechaHora;
@@ -48,11 +49,11 @@ public class Comentario {
         this.usuario = usuario;
     }
 
-    public Date getFechaHora() {
+    public LocalDateTime getFechaHora() {
         return fechaHora;
     }
 
-    public void setFechaHora(Date fechaHora) {
+    public void setFechaHora(LocalDateTime fechaHora) {
         this.fechaHora = fechaHora;
     }
 
