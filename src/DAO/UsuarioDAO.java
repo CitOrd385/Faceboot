@@ -8,6 +8,7 @@ package DAO;
 import ObjetosNegocio.Usuario;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import org.bson.Document;
 import org.bson.types.ObjectId;
 
 /**
@@ -29,19 +30,79 @@ public class UsuarioDAO extends BaseDAO<Usuario> {
         coleccion.insertOne(usuario);
     }
 
-    @Override
+
     public Usuario consularporId(ObjectId id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         MongoCollection coleccion = this.getCollection();
+        Document filtroId = new Document();
+        filtroId.append("_id", id);
+        Document usuario = (Document) coleccion.find(filtroId).first();
+        if (usuario != null) {
+            System.out.println(usuario);
+      
+        }
+        else{
+            System.out.println("No se encontro el usuario");
+        }
+        return  null;
+    }
+
+    public void actualizar(Usuario usuario) {
+         MongoCollection coleccion = this.getCollection();
+ 
+        Document searchDoc = new Document("_id",usuario.getId());
+        Document updateDoc = new Document();
+        
+        updateDoc.append("nombre", usuario.getNombre());
+        updateDoc.append("contraseña", usuario.getContraseña());
+        updateDoc.append("edad", usuario.getEdad());
+        updateDoc.append("sexo", usuario.getSexo());
+        updateDoc.append("fechaNacimiento", usuario.getFechaNacimiento());
+        updateDoc.append("generosPeliculas", usuario.getGenerosPeliculas());
+        updateDoc.append("generosMusica", usuario.getGenerosMusica());
+        updateDoc.append("publicaciones", usuario.getPublicaciones());
+        
+        Document setDoc = new Document();
+        setDoc.append("$set", updateDoc);
+        
+        coleccion.updateOne(searchDoc, setDoc);
     }
 
     @Override
-    public void actualizar(Usuario entidad) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void eliminar(Usuario entidad) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void eliminar(Usuario usuario) {
+        MongoCollection coleccion = this.getCollection();
+        Document searchDocument = new Document("_id", usuario.getId());
+        coleccion.findOneAndDelete(searchDocument);
     }
     
+    
+    public Usuario consultarGenerosMusicales(Usuario usuario){
+        MongoCollection coleccion = this.getCollection();
+        Document busquedaGenMusical = new Document();
+        busquedaGenMusical.append("generosMusicales", usuario.getGenerosMusica());
+        Document generosMusicales = (Document) coleccion.find(busquedaGenMusical);
+        if(generosMusicales != null){
+            System.out.println(usuario);
+            return usuario;
+        }else{
+            System.out.println("Los generos musicales no se encontró");
+            return null;
+        }
+    }
+    
+    
+    public Usuario consultarGenerosPeliculas(Usuario usuario){
+        MongoCollection coleccion = this.getCollection();
+        Document busquedaGenPelicula = new Document();
+        busquedaGenPelicula.append("generosPeliculas",usuario.getGenerosPeliculas());
+        Document generosPeliculas= (Document) coleccion.find(busquedaGenPelicula);
+        if(generosPeliculas != null){
+            System.out.println(usuario);
+            Usuario usuarioFind= (Usuario) usuario.getGenerosPeliculas();
+            return usuarioFind;
+        }else{
+            System.out.println("Los generos de peliculas no se encontró");
+            return null;
+        }
+        
+    }
 }

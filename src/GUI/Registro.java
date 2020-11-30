@@ -43,7 +43,7 @@ public class Registro extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         txtGenerosMusica = new javax.swing.JTextField();
-        txtGenerosMusica1 = new javax.swing.JTextField();
+        txtGenerosPeliculas = new javax.swing.JTextField();
         btnAgregarGenPelis = new javax.swing.JButton();
         btnAgregarGenMusica = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
@@ -156,9 +156,9 @@ public class Registro extends javax.swing.JFrame {
             }
         });
 
-        txtGenerosMusica1.addActionListener(new java.awt.event.ActionListener() {
+        txtGenerosPeliculas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtGenerosMusica1ActionPerformed(evt);
+                txtGenerosPeliculasActionPerformed(evt);
             }
         });
 
@@ -181,7 +181,7 @@ public class Registro extends javax.swing.JFrame {
                     .addGroup(panelPeliculasMusicaLayout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtGenerosMusica1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtGenerosPeliculas, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnAgregarGenPelis))
                     .addGroup(panelPeliculasMusicaLayout.createSequentialGroup()
@@ -203,7 +203,7 @@ public class Registro extends javax.swing.JFrame {
                 .addGap(13, 13, 13)
                 .addGroup(panelPeliculasMusicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtGenerosMusica1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtGenerosPeliculas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAgregarGenPelis))
                 .addGap(16, 16, 16))
         );
@@ -269,9 +269,9 @@ public class Registro extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtGenerosMusicaActionPerformed
 
-    private void txtGenerosMusica1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtGenerosMusica1ActionPerformed
+    private void txtGenerosPeliculasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtGenerosPeliculasActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtGenerosMusica1ActionPerformed
+    }//GEN-LAST:event_txtGenerosPeliculasActionPerformed
 
     private void btnAgregarGenPelisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarGenPelisActionPerformed
         // TODO add your handling code here:
@@ -337,7 +337,7 @@ public class Registro extends javax.swing.JFrame {
     private javax.swing.JPanel panelTitulo;
     private javax.swing.JTextField txtContraseña;
     private javax.swing.JTextField txtGenerosMusica;
-    private javax.swing.JTextField txtGenerosMusica1;
+    private javax.swing.JTextField txtGenerosPeliculas;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 }

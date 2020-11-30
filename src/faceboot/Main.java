@@ -10,9 +10,6 @@ import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.Month;
-import java.util.Date;
 import org.bson.Document;
 
 /**

@@ -50,8 +50,6 @@ public abstract class BaseDAO<T> {
      
     protected abstract MongoCollection<T> getCollection();
     public abstract void agregar(T entidad);
-    public abstract T consularporId(ObjectId id);
-    public abstract void actualizar(T entidad);
     public abstract void eliminar(T entidad);
     
 }
