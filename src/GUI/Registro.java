@@ -5,18 +5,38 @@
  */
 package GUI;
 
+import DAO.UsuarioDAO;
+import ObjetosNegocio.Usuario;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author Citlali Orduño
  */
 public class Registro extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Registro
-     */
+    UsuarioDAO udao;
+    
+    List<String> gPeliculas;
+    List<String> gMusica;
+    
     public Registro() {
         initComponents();
+        udao = new UsuarioDAO();
     }
+    
+     public void agregarUsuario(){
+        String nombre = this.txtNombre.getText();
+        String contraseña = this.txtContraseña.getText();
+        LocalDate fechaNacimiento = LocalDate.parse(this.jDateChooser1.getDate().toString());
+        String sexo = this.cmbSexo.getSelectedItem().toString();
+        Usuario usuario = new Usuario(nombre, contraseña, sexo, fechaNacimiento, gPeliculas, gMusica);
+        udao.agregar(usuario);
+    }
+     
+     
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -170,6 +190,11 @@ public class Registro extends javax.swing.JFrame {
         });
 
         btnAgregarGenMusica.setText("Agregar");
+        btnAgregarGenMusica.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarGenMusicaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelPeliculasMusicaLayout = new javax.swing.GroupLayout(panelPeliculasMusica);
         panelPeliculasMusica.setLayout(panelPeliculasMusicaLayout);
@@ -190,7 +215,7 @@ public class Registro extends javax.swing.JFrame {
                         .addComponent(txtGenerosMusica, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnAgregarGenMusica)))
-                .addContainerGap(7, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelPeliculasMusicaLayout.setVerticalGroup(
             panelPeliculasMusicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -213,6 +238,11 @@ public class Registro extends javax.swing.JFrame {
         btnRegistrarUsuario.setBackground(new java.awt.Color(102, 102, 255));
         btnRegistrarUsuario.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btnRegistrarUsuario.setText("¡Crear cuenta!");
+        btnRegistrarUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarUsuarioActionPerformed(evt);
+            }
+        });
 
         btnInicio.setText("Volver a inicio");
         btnInicio.addActionListener(new java.awt.event.ActionListener() {
@@ -274,12 +304,25 @@ public class Registro extends javax.swing.JFrame {
     }//GEN-LAST:event_txtGenerosPeliculasActionPerformed
 
     private void btnAgregarGenPelisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarGenPelisActionPerformed
-        // TODO add your handling code here:
+        gPeliculas = new ArrayList<>();
+        gPeliculas.add(this.txtGenerosPeliculas.getText());
+        this.txtGenerosPeliculas.setText("");
     }//GEN-LAST:event_btnAgregarGenPelisActionPerformed
 
     private void btnInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInicioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnInicioActionPerformed
+
+    private void btnAgregarGenMusicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarGenMusicaActionPerformed
+        gMusica = new ArrayList<>();
+        gMusica.add(this.txtGenerosMusica.getText());
+        this.txtGenerosMusica.setText("");
+    }//GEN-LAST:event_btnAgregarGenMusicaActionPerformed
+
+    private void btnRegistrarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarUsuarioActionPerformed
+        MuroPosts muroPosts = new MuroPosts();
+        muroPosts.setVisible(true);
+    }//GEN-LAST:event_btnRegistrarUsuarioActionPerformed
 
     /**
      * @param args the command line arguments

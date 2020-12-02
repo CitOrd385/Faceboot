@@ -66,6 +66,16 @@ public class Usuario {
         this.publicaciones= publicaciones;
     }
 
+    public Usuario(String nombre, String contraseña, String sexo, LocalDate fechaNacimiento, List<String> gPeliculas, List<String> gMusica) {
+        this.nombre = nombre;
+        this.contraseña = contraseña;
+        this.edad = edad;
+        this.sexo = sexo;
+        this.fechaNacimiento = fechaNacimiento;
+        this.generosPeliculas = generosPeliculas;
+        this.generosMusica = generosMusica;
+    }
+
     public ObjectId getId() {
         return id;
     }

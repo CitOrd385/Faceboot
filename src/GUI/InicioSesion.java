@@ -148,7 +148,8 @@ public class InicioSesion extends javax.swing.JFrame {
     }//GEN-LAST:event_txtUsernameActionPerformed
 
     private void btnCrearCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearCuentaActionPerformed
-        // TODO add your handling code here:
+        Registro registro = new Registro();
+        registro.setVisible(true);
     }//GEN-LAST:event_btnCrearCuentaActionPerformed
 
     private void txtPswrdContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPswrdContraseñaActionPerformed
