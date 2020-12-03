@@ -38,7 +38,7 @@ public class UsuarioDAO extends BaseDAO<Usuario> {
         Document usuario = (Document) coleccion.find(filtroId).first();
         if (usuario != null) {
             System.out.println(usuario);
-      
+         
         }
         else{
             System.out.println("No se encontro el usuario");
@@ -72,6 +72,23 @@ public class UsuarioDAO extends BaseDAO<Usuario> {
         MongoCollection coleccion = this.getCollection();
         Document searchDocument = new Document("_id", usuario.getId());
         coleccion.findOneAndDelete(searchDocument);
+    }
+    
+    public Usuario consultarUsuario(String correoElectronico, String contrasenia){
+        Usuario usuario= null;
+        MongoCollection coleccion = this.getCollection();
+        Document filtroCorreo = new Document(); 
+        filtroCorreo.append("correoElectronico", correoElectronico);
+        filtroCorreo.append("Contraseña",contrasenia);
+        usuario= (Usuario) coleccion.find(filtroCorreo).first();
+        
+        if(usuario != null){
+            System.out.println(usuario);
+            return usuario;
+        }else{
+            System.out.println("No se encontró el usuario");
+            return null;
+        }
     }
     
     
