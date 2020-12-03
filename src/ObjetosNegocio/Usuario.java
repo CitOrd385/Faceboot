@@ -21,6 +21,7 @@ public class Usuario {
     private ObjectId id;
     private String nombre;
     private String contraseña;
+    private String correoElectronico;
     private int edad;
     private String sexo;
     private LocalDate fechaNacimiento;
@@ -31,10 +32,13 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Usuario(String nombre, String contraseña, String sexo,LocalDate fechaNacimiento, 
-            List<String> generosPeliculas, List<String> generosMusica, List<Publicacion> publicaciones) {
+    //constructor que recibe en sus parametros todos los atributos pero no el id de usuario
+    public Usuario(String nombre, String correoElentronico, String contraseña, 
+            String sexo,LocalDate fechaNacimiento, List<String> generosPeliculas, 
+            List<String> generosMusica, List<Publicacion> publicaciones) {
         this.nombre = nombre;
         this.contraseña = contraseña;
+        this.correoElectronico= correoElectronico;
         this.edad = edad;
         this.sexo = sexo;
         this.fechaNacimiento = fechaNacimiento;
@@ -43,17 +47,20 @@ public class Usuario {
         this.publicaciones= publicaciones;
     }
 
-    public Usuario(String nombre, String contraseña, String sexo, LocalDate fechaNacimiento) {
+    //Contructor de cale, no se utilizará para el proyecto en sí 
+    public Usuario(String nombre, String correoElectronico,String contraseña, 
+            String sexo, LocalDate fechaNacimiento) {
         this.nombre = nombre;
         this.contraseña = contraseña;
+        this.correoElectronico= this.correoElectronico;
         this.edad = edad;
         this.sexo = sexo;
         this.fechaNacimiento = fechaNacimiento;
     }
     
-
-    public Usuario(ObjectId id, String nombre, String contraseña, int edad, 
-            String sexo, LocalDate fechaNacimiento, List<String> generosPeliculas, 
+//Constructor que recibe todos los atributos del usuario
+    public Usuario(ObjectId id, String nombre, String correoElectronic, String contraseña,
+            int edad, String sexo, LocalDate fechaNacimiento, List<String> generosPeliculas, 
             List<String> generosMusica, List<Publicacion> publicaciones) {
         this.id = id;
         this.nombre = nombre;
@@ -66,7 +73,9 @@ public class Usuario {
         this.publicaciones= publicaciones;
     }
 
-    public Usuario(String nombre, String contraseña, String sexo, LocalDate fechaNacimiento, List<String> gPeliculas, List<String> gMusica) {
+    //Constructor que recibe todos los atributos menos el id del usuario y publicaciones
+    public Usuario(String nombre, String correoElectronico,String contraseña,
+            String sexo, LocalDate fechaNacimiento, List<String> generosPeliculas, List<String> generosMusica) {
         this.nombre = nombre;
         this.contraseña = contraseña;
         this.edad = edad;
@@ -96,6 +105,15 @@ public class Usuario {
         return contraseña;
     }
 
+    public String getCorreoElectronico() {
+        return correoElectronico;
+    }
+
+    public void setCorreoElectronico(String correoElectronico) {
+        this.correoElectronico = correoElectronico;
+    }
+
+    
     public void setContraseña(String contraseña) {
         this.contraseña = contraseña;
     }
@@ -174,6 +192,15 @@ public class Usuario {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Usuario{" + "nombre=" + nombre + ", contrase\u00f1a=" +
+                contraseña + ", correoElectronico=" + correoElectronico + 
+                ", edad=" + edad + ", sexo=" + sexo + ", fechaNacimiento=" + fechaNacimiento + 
+                ", generosPeliculas=" + generosPeliculas + ", generosMusica=" + generosMusica +
+                ", publicaciones=" + publicaciones + '}';
     }
     
     

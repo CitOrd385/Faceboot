@@ -29,10 +29,11 @@ public class Registro extends javax.swing.JFrame {
     
      public void agregarUsuario(){
         String nombre = this.txtNombre.getText();
+        String correoElectronico="";
         String contraseña = this.txtContraseña.getText();
         LocalDate fechaNacimiento = LocalDate.parse(this.jDateChooser1.getDate().toString());
         String sexo = this.cmbSexo.getSelectedItem().toString();
-        Usuario usuario = new Usuario(nombre, contraseña, sexo, fechaNacimiento, gPeliculas, gMusica);
+        Usuario usuario = new Usuario(nombre, correoElectronico, contraseña, sexo, fechaNacimiento, gPeliculas, gMusica);
         udao.agregar(usuario);
     }
      
@@ -59,6 +60,8 @@ public class Registro extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        txtCorreoElectronico = new javax.swing.JTextField();
         panelPeliculasMusica = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -110,7 +113,10 @@ public class Registro extends javax.swing.JFrame {
         jLabel9.setText("Nacimiento:");
 
         jLabel10.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel10.setText("Constraseña:");
+        jLabel10.setText("Correo:");
+
+        jLabel11.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel11.setText("Constraseña:");
 
         javax.swing.GroupLayout panelPersonalLayout = new javax.swing.GroupLayout(panelPersonal);
         panelPersonal.setLayout(panelPersonalLayout);
@@ -119,28 +125,27 @@ public class Registro extends javax.swing.JFrame {
             .addGroup(panelPersonalLayout.createSequentialGroup()
                 .addGroup(panelPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelPersonalLayout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(jLabel10)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtContraseña))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelPersonalLayout.createSequentialGroup()
+                        .addGap(40, 40, 40)
                         .addGroup(panelPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelPersonalLayout.createSequentialGroup()
-                                .addGap(62, 62, 62)
-                                .addGroup(panelPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel8))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(panelPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cmbSexo, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelPersonalLayout.createSequentialGroup()
-                                .addGap(32, 32, 32)
-                                .addComponent(jLabel9)
-                                .addGap(18, 18, 18)
-                                .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(63, 63, 63))
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel1))
+                        .addGap(18, 18, 18)
+                        .addGroup(panelPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cmbSexo, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(10, 10, 10))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelPersonalLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addGroup(panelPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel11))
+                        .addGap(18, 18, 18)
+                        .addGroup(panelPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtContraseña)
+                            .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCorreoElectronico))))
+                .addContainerGap(63, Short.MAX_VALUE))
         );
         panelPersonalLayout.setVerticalGroup(
             panelPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -157,11 +162,15 @@ public class Registro extends javax.swing.JFrame {
                 .addGroup(panelPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9))
-                .addGap(14, 14, 14)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(txtCorreoElectronico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10))
-                .addContainerGap(16, Short.MAX_VALUE))
+                    .addComponent(jLabel11))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         panelPeliculasMusica.setBorder(javax.swing.BorderFactory.createTitledBorder("Dinos tus gustos!"));
@@ -282,12 +291,12 @@ public class Registro extends javax.swing.JFrame {
                 .addGap(13, 13, 13)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(panelPersonal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
-                .addComponent(panelPeliculasMusica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panelPersonal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(panelPeliculasMusica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(btnRegistrarUsuario)
-                .addGap(26, 26, 26)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnInicio)
                 .addGap(17, 17, 17))
         );
@@ -369,6 +378,7 @@ public class Registro extends javax.swing.JFrame {
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -379,6 +389,7 @@ public class Registro extends javax.swing.JFrame {
     private javax.swing.JPanel panelPersonal;
     private javax.swing.JPanel panelTitulo;
     private javax.swing.JTextField txtContraseña;
+    private javax.swing.JTextField txtCorreoElectronico;
     private javax.swing.JTextField txtGenerosMusica;
     private javax.swing.JTextField txtGenerosPeliculas;
     private javax.swing.JTextField txtNombre;

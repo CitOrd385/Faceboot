@@ -41,7 +41,7 @@ public class Main {
        
       // coleccion.insertOne(documento);
        
-       Usuario usuario= new Usuario("Tiffany", "rosiefabuloli", "mujer", fechaNacimiento);
+       Usuario usuario= new Usuario("Tiffany","tiffa_rosie@gmail.com", "rosiefabuloli", "mujer", fechaNacimiento);
        
        // System.out.println(usuario.getEdad());
        
