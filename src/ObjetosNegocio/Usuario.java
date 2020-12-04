@@ -23,7 +23,7 @@ public class Usuario {
     private LocalDate fechaNacimiento;
     private List<String> generosPeliculas;
     private List<String> generosMusica;
-    private List<Publicacion> publicaciones; 
+    
     
     public Usuario() {
     }
@@ -31,7 +31,7 @@ public class Usuario {
     //constructor que recibe en sus parametros todos los atributos pero no el id de usuario
     public Usuario(String nombre, String correoElentronico, String contraseña, 
             String sexo,LocalDate fechaNacimiento, List<String> generosPeliculas, 
-            List<String> generosMusica, List<Publicacion> publicaciones) {
+            List<String> generosMusica) {
         this.nombre = nombre;
         this.contraseña = contraseña;
         this.correoElectronico= correoElectronico;
@@ -40,14 +40,14 @@ public class Usuario {
         this.fechaNacimiento = fechaNacimiento;
         this.generosPeliculas = generosPeliculas;
         this.generosMusica = generosMusica;
-        this.publicaciones= publicaciones;
+     
     }
 
     
 //Constructor que recibe todos los atributos del usuario
     public Usuario(ObjectId id, String nombre, String correoElectronico, String contraseña,
             int edad, String sexo, LocalDate fechaNacimiento, List<String> generosPeliculas, 
-            List<String> generosMusica, List<Publicacion> publicaciones) {
+            List<String> generosMusica) {
         this.id = id;
         this.nombre = nombre;
         this.contraseña = contraseña;
@@ -56,19 +56,7 @@ public class Usuario {
         this.fechaNacimiento = fechaNacimiento;
         this.generosPeliculas = generosPeliculas;
         this.generosMusica = generosMusica;
-        this.publicaciones= publicaciones;
-    }
-
-    //Constructor que recibe todos los atributos menos el id del usuario y publicaciones
-    public Usuario(String nombre, String correoElectronico,String contraseña,
-            String sexo, LocalDate fechaNacimiento, List<String> generosPeliculas, List<String> generosMusica) {
-        this.nombre = nombre;
-        this.contraseña = contraseña;
-        this.edad = edad;
-        this.sexo = sexo;
-        this.fechaNacimiento = fechaNacimiento;
-        this.generosPeliculas = generosPeliculas;
-        this.generosMusica = generosMusica;
+       
     }
 
     public ObjectId getId() {
@@ -146,14 +134,6 @@ public class Usuario {
         this.generosMusica = generosMusica;
     }
 
-    public List<Publicacion> getPublicaciones() {
-        return publicaciones;
-    }
-
-    public void setPublicaciones(List<Publicacion> publicaciones) {
-        this.publicaciones = publicaciones;
-    }
-    
     @Override
     public int hashCode() {
         int hash = 3;
@@ -184,8 +164,7 @@ public class Usuario {
         return "Usuario{" + "nombre=" + nombre + ", contrase\u00f1a=" +
                 contraseña + ", correoElectronico=" + correoElectronico + 
                 ", edad=" + edad + ", sexo=" + sexo + ", fechaNacimiento=" + fechaNacimiento + 
-                ", generosPeliculas=" + generosPeliculas + ", generosMusica=" + generosMusica +
-                ", publicaciones=" + publicaciones + '}';
+                ", generosPeliculas=" + generosPeliculas + ", generosMusica=" + generosMusica +'}';
     }
     
     

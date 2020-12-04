@@ -11,6 +11,7 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import static com.mongodb.client.model.Filters.eq;
 import java.util.ArrayList;
+import java.util.List;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
@@ -89,36 +90,14 @@ public class UsuarioDAO extends BaseDAO<Usuario> {
        }
     }
     
-    public ArrayList<Usuario> consultarGenerosMusicales(Usuario usuario){
+    public List<String> consultarGenerosMusicales(Usuario usuario){
         MongoCollection coleccion = this.getCollection();
-        Document busquedaGenMusical = new Document();
-        
-        busquedaGenMusical.append("generosMusicales", usuario.getGenerosMusica());
-        FindIterable<Usuario> user= coleccion.find(busquedaGenMusical);
-        ArrayList<Usuario> listaGenerosMusicales = new ArrayList<>();
-        if(user != null){
-            System.out.println("Entró en el if a huevo");
-            return user.into(listaGenerosMusicales);
-        }else{
-            System.out.println("Los generos musicales no se encontró");
-            return null;
-        }
+       return usuario.getGenerosMusica();
     }
     
-    
-    public Usuario consultarGenerosPeliculas(Usuario usuario){
+    public List<String> consultarGenerosPeliculas(Usuario usuario){
         MongoCollection coleccion = this.getCollection();
-        Document busquedaGenPelicula = new Document();
-        busquedaGenPelicula.append("generosPeliculas",usuario.getGenerosPeliculas());
-        Document generosPeliculas= (Document) coleccion.find(busquedaGenPelicula);
-        if(generosPeliculas != null){
-            System.out.println(usuario);
-            Usuario usuarioFind= (Usuario) usuario.getGenerosPeliculas();
-            return usuarioFind;
-        }else{
-            System.out.println("Los generos de peliculas no se encontró");
-            return null;
-        }
-        
+        return usuario.getGenerosPeliculas();
+
     }
 }

@@ -70,10 +70,10 @@ public class Main {
        
        //udao.agregar(usuario);
        
-       ArrayList<Usuario> generosMusicales= udao.consultarGenerosMusicales(usuario);
+       List<String> generosMusicales= udao.consultarGenerosPeliculas(usuario);
        
-        for (Usuario generosMusic : generosMusicales) {
-            System.out.println(generosMusic.getGenerosMusica());
+        for (String generosMusic : generosMusicales) {
+            System.out.println(generosMusic);
         }
        //udao.consultarGenerosMusicales(usuario);
        

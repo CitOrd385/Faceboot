@@ -7,9 +7,13 @@ package DAO;
 
 import ObjetosNegocio.Comentario;
 import ObjetosNegocio.Publicacion;
+import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import static com.mongodb.client.model.Filters.eq;
 import com.mongodb.client.model.Updates;
+import java.util.ArrayList;
+import java.util.List;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
@@ -23,12 +27,15 @@ public class PublicacionDAO extends BaseDAO<Publicacion>{
     protected MongoCollection<Publicacion> getCollection() {
         MongoDatabase baseDatos = this.getDatabase();
         MongoCollection<Publicacion> coleccion = baseDatos.getCollection("publicaciones",Publicacion.class);
+        
+        //Esto es un comentario de cale, para que salga github
         return coleccion;
     }
 
     @Override
-    public void agregar(Publicacion entidad) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void agregar(Publicacion publicacion) {
+        MongoCollection<Publicacion> coleccion = this.getCollection();
+        coleccion.insertOne(publicacion);
     }
 
  
@@ -63,5 +70,26 @@ public class PublicacionDAO extends BaseDAO<Publicacion>{
     }
     
     
+    public List<Publicacion> buscarPorTag(String tag){
+        MongoCollection coleccion= this.getCollection();
+        FindIterable<Publicacion> publicaciones= coleccion.find(eq("tags",tag));
+        
+        List<Publicacion> listaPublicaciones= new ArrayList<>();
+        
+        for (Publicacion listaPubs : listaPublicaciones) {
+         listaPublicaciones.add(listaPubs);
+        }
+        return listaPublicaciones;
+    }
     
+    public void eliminarComentario(Publicacion pub, Comentario comentario){
+        MongoCollection coleccion= this.getCollection();
+        Document filtro= new Document();
+        filtro.append("_id", pub.getId());
+        Document actualiza= new Document();
+        actualiza.append("comentarios",comentario);
+        
+        coleccion.updateOne(filtro, actualiza);
+                
+    }
 }
