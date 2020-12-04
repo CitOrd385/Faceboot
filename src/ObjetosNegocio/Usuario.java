@@ -59,7 +59,7 @@ public class Usuario {
     }
     
 //Constructor que recibe todos los atributos del usuario
-    public Usuario(ObjectId id, String nombre, String correoElectronic, String contraseña,
+    public Usuario(ObjectId id, String nombre, String correoElectronico, String contraseña,
             int edad, String sexo, LocalDate fechaNacimiento, List<String> generosPeliculas, 
             List<String> generosMusica, List<Publicacion> publicaciones) {
         this.id = id;
@@ -112,8 +112,7 @@ public class Usuario {
     public void setCorreoElectronico(String correoElectronico) {
         this.correoElectronico = correoElectronico;
     }
-
-    
+ 
     public void setContraseña(String contraseña) {
         this.contraseña = contraseña;
     }

@@ -6,8 +6,10 @@
 package DAO;
 
 import ObjetosNegocio.Usuario;
+import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import static com.mongodb.client.model.Filters.eq;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
@@ -32,13 +34,14 @@ public class UsuarioDAO extends BaseDAO<Usuario> {
 
 
     public Usuario consularporId(ObjectId id) {
-         MongoCollection coleccion = this.getCollection();
+        MongoCollection<Usuario> coleccion = this.getCollection();
         Document filtroId = new Document();
         filtroId.append("_id", id);
-        Document usuario = (Document) coleccion.find(filtroId).first();
+
+        Usuario usuario= coleccion.find(eq("_id", filtroId)).first();
         if (usuario != null) {
             System.out.println(usuario);
-         
+         return usuario;
         }
         else{
             System.out.println("No se encontro el usuario");
@@ -74,22 +77,22 @@ public class UsuarioDAO extends BaseDAO<Usuario> {
         coleccion.findOneAndDelete(searchDocument);
     }
     
-    public Usuario consultarUsuario(String correoElectronico, String contrasenia){
-        Usuario usuario= null;
-        MongoCollection coleccion = this.getCollection();
+    public Usuario consultarCorreo(Usuario usuario){
+        MongoCollection<Usuario> coleccion = this.getCollection();
         Document filtroCorreo = new Document(); 
-        filtroCorreo.append("correoElectronico", correoElectronico);
-        filtroCorreo.append("Contraseña",contrasenia);
-        usuario= (Usuario) coleccion.find(filtroCorreo).first();
-        
-        if(usuario != null){
-            System.out.println(usuario);
-            return usuario;
-        }else{
-            System.out.println("No se encontró el usuario");
-            return null;
-        }
+        filtroCorreo.append("correoElectronico", usuario.getCorreoElectronico());
+        FindIterable<Usuario> usuarios= coleccion.find(filtroCorreo);
+       if(usuarios != null){
+           for (Usuario documento : usuarios) {
+               System.out.println(documento);
+           }
+           return usuario;
+       }else{
+           System.out.println("Pura madre se agregó");
+           return null;
+       }
     }
+    
     
     
     public Usuario consultarGenerosMusicales(Usuario usuario){

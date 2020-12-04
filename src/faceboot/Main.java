@@ -5,11 +5,14 @@
  */
 package faceboot;
 
+import DAO.UsuarioDAO;
 import ObjetosNegocio.Usuario;
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import org.bson.Document;
 
 /**
@@ -40,8 +43,34 @@ public class Main {
                append("fechaNacimiento",fechaNacimiento);
        
       // coleccion.insertOne(documento);
+     
+      
+        List<String> generosMusica= new ArrayList<>();
+        generosMusica.add("Trash metal");
+        generosMusica.add("Heavy metal");
+        generosMusica.add("Rock psicodelico");
+        
+        List<String> generosPeliculas= new ArrayList<>();
+        generosPeliculas.add("Terror");
+        generosPeliculas.add("Misterio");
+        generosPeliculas.add("Accion");
+        
+       Usuario usuario= new Usuario();
+       usuario.setNombre("Marisol");
+       usuario.setCorreoElectronico("mari_solecito23@gmail.com");
+       usuario.setContraseña("solecito15");
+       usuario.setSexo("mujer");
+       usuario.setFechaNacimiento(fechaNacimiento);
+       usuario.setGenerosMusica(generosMusica);
+       usuario.setGenerosPeliculas(generosPeliculas);
+     
        
-       Usuario usuario= new Usuario("Tiffany","tiffa_rosie@gmail.com", "rosiefabuloli", "mujer", fechaNacimiento);
+       UsuarioDAO udao= new UsuarioDAO();
+       
+       
+       //udao.agregar(usuario);
+       udao.consultarCorreo(usuario);
+       //udao.consultarGenerosMusicales(usuario);
        
        // System.out.println(usuario.getEdad());
        
