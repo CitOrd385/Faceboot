@@ -10,6 +10,7 @@ import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import static com.mongodb.client.model.Filters.eq;
+import java.util.ArrayList;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
@@ -58,11 +59,6 @@ public class UsuarioDAO extends BaseDAO<Usuario> {
         updateDoc.append("nombre", usuario.getNombre());
         updateDoc.append("contraseña", usuario.getContraseña());
         updateDoc.append("edad", usuario.getEdad());
-        updateDoc.append("sexo", usuario.getSexo());
-        updateDoc.append("fechaNacimiento", usuario.getFechaNacimiento());
-        updateDoc.append("generosPeliculas", usuario.getGenerosPeliculas());
-        updateDoc.append("generosMusica", usuario.getGenerosMusica());
-        updateDoc.append("publicaciones", usuario.getPublicaciones());
         
         Document setDoc = new Document();
         setDoc.append("$set", updateDoc);
@@ -93,16 +89,16 @@ public class UsuarioDAO extends BaseDAO<Usuario> {
        }
     }
     
-    
-    
-    public Usuario consultarGenerosMusicales(Usuario usuario){
+    public ArrayList<Usuario> consultarGenerosMusicales(Usuario usuario){
         MongoCollection coleccion = this.getCollection();
         Document busquedaGenMusical = new Document();
+        
         busquedaGenMusical.append("generosMusicales", usuario.getGenerosMusica());
-        Document generosMusicales = (Document) coleccion.find(busquedaGenMusical);
-        if(generosMusicales != null){
-            System.out.println(usuario);
-            return usuario;
+        FindIterable<Usuario> user= coleccion.find(busquedaGenMusical);
+        ArrayList<Usuario> listaGenerosMusicales = new ArrayList<>();
+        if(user != null){
+            System.out.println("Entró en el if a huevo");
+            return user.into(listaGenerosMusicales);
         }else{
             System.out.println("Los generos musicales no se encontró");
             return null;

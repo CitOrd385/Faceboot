@@ -69,7 +69,12 @@ public class Main {
        
        
        //udao.agregar(usuario);
-       udao.consultarCorreo(usuario);
+       
+       ArrayList<Usuario> generosMusicales= udao.consultarGenerosMusicales(usuario);
+       
+        for (Usuario generosMusic : generosMusicales) {
+            System.out.println(generosMusic.getGenerosMusica());
+        }
        //udao.consultarGenerosMusicales(usuario);
        
        // System.out.println(usuario.getEdad());

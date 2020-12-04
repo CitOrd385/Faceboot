@@ -8,11 +8,7 @@ package ObjetosNegocio;
 
 import java.time.LocalDate;
 import java.time.Period;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 import java.util.List;
-import java.util.Date;
 import java.util.Objects;
 import org.bson.types.ObjectId;
 
@@ -47,16 +43,6 @@ public class Usuario {
         this.publicaciones= publicaciones;
     }
 
-    //Contructor de cale, no se utilizará para el proyecto en sí 
-    public Usuario(String nombre, String correoElectronico,String contraseña, 
-            String sexo, LocalDate fechaNacimiento) {
-        this.nombre = nombre;
-        this.contraseña = contraseña;
-        this.correoElectronico= this.correoElectronico;
-        this.edad = edad;
-        this.sexo = sexo;
-        this.fechaNacimiento = fechaNacimiento;
-    }
     
 //Constructor que recibe todos los atributos del usuario
     public Usuario(ObjectId id, String nombre, String correoElectronico, String contraseña,
