@@ -5,23 +5,31 @@
  */
 package GUI;
 
+import DAO.PublicacionDAO;
 import ObjetosNegocio.Usuario;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Citlali Orduño
  */
 public class MuroPosts extends javax.swing.JFrame {
-
+    
+    private PublicacionDAO pdao = null;
+    private Usuario usu = null;
+    
     /**
      * Creates new form MuroPosts
      */
     public MuroPosts() {
-        initComponents();
+        
     }
     
     public MuroPosts(Usuario user){
+        this.pdao = new PublicacionDAO();
+        this.usu = user;
         initComponents();
+        this.setNombreUsuario();
     }
 
     /**
@@ -44,16 +52,17 @@ public class MuroPosts extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        lblName = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea2 = new javax.swing.JTextArea();
         jLabel6 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jLabel7 = new javax.swing.JLabel();
+        lblUsuario = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         mnuEditarPerfil = new javax.swing.JMenu();
         mnCerrarSesion = new javax.swing.JMenu();
+        iCerrarSesion = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -95,7 +104,7 @@ public class MuroPosts extends javax.swing.JFrame {
         jTextArea1.setRows(5);
         jScrollPane3.setViewportView(jTextArea1);
 
-        jLabel4.setText("David234");
+        lblName.setText("David234");
 
         jTextArea2.setColumns(20);
         jTextArea2.setRows(5);
@@ -104,6 +113,11 @@ public class MuroPosts extends javax.swing.JFrame {
         jLabel6.setText("Comentarios");
 
         jButton1.setText("Comentar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -123,7 +137,7 @@ public class MuroPosts extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel4)
+                                .addComponent(lblName)
                                 .addGap(399, 399, 399)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -143,7 +157,7 @@ public class MuroPosts extends javax.swing.JFrame {
                         .addGap(16, 16, 16))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel4)
+                        .addComponent(lblName)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -187,13 +201,22 @@ public class MuroPosts extends javax.swing.JFrame {
             }
         });
 
-        jLabel7.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel7.setText("David234");
+        lblUsuario.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        lblUsuario.setText("Usuario");
 
         mnuEditarPerfil.setText("Editar perfil");
         jMenuBar1.add(mnuEditarPerfil);
 
         mnCerrarSesion.setText("Cerrar sesión");
+
+        iCerrarSesion.setText("Cerrar sesión");
+        iCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                iCerrarSesionActionPerformed(evt);
+            }
+        });
+        mnCerrarSesion.add(iCerrarSesion);
+
         jMenuBar1.add(mnCerrarSesion);
 
         setJMenuBar(jMenuBar1);
@@ -210,7 +233,7 @@ public class MuroPosts extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(8, 8, 8)
-                                .addComponent(jLabel7))
+                                .addComponent(lblUsuario))
                             .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -228,7 +251,7 @@ public class MuroPosts extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel7))
+                    .addComponent(lblUsuario))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtBusquedaTags, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -246,9 +269,32 @@ public class MuroPosts extends javax.swing.JFrame {
     }//GEN-LAST:event_txtBusquedaTagsActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        RegistroPost rP = new RegistroPost();
+        rP.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        RegistroComentarios rC = new RegistroComentarios();
+        rC.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void iCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iCerrarSesionActionPerformed
+        int dialog = JOptionPane.showConfirmDialog(this, "¿Seguro que deseas cerrar sesión?", 
+                "Confirmación", JOptionPane.YES_NO_OPTION);
+        if (dialog == JOptionPane.YES_OPTION) {
+            this.dispose();
+            InicioSesion iS = new InicioSesion();
+            iS.setVisible(true);
+        }else{
+            JOptionPane.showConfirmDialog(this, "La sesión no fue cerrada", "Mensaje", JOptionPane.PLAIN_MESSAGE);
+        }
+    }//GEN-LAST:event_iCerrarSesionActionPerformed
+
+    public void setNombreUsuario(){
+        this.lblUsuario.setText(usu.getNombre());
+        this.lblName.setText(usu.getNombre());
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -288,14 +334,13 @@ public class MuroPosts extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem iCerrarSesion;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -305,6 +350,8 @@ public class MuroPosts extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea2;
     private javax.swing.JLabel lblFacebbot;
+    private javax.swing.JLabel lblName;
+    private javax.swing.JLabel lblUsuario;
     private javax.swing.JMenu mnCerrarSesion;
     private javax.swing.JMenu mnuEditarPerfil;
     private javax.swing.JPanel panelTitulo;

@@ -5,6 +5,8 @@
  */
 package GUI;
 
+import ObjetosNegocio.Usuario;
+
 /**
  *
  * @author Citlali Orduño
@@ -15,6 +17,8 @@ public class RegistroPost extends javax.swing.JFrame {
     /**
      * Creates new form CreaciónPosts
      */
+    Usuario usuario = null;
+    
     public RegistroPost() {
         initComponents();
     }
@@ -104,10 +108,15 @@ public class RegistroPost extends javax.swing.JFrame {
                     .addComponent(txtTags, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnTag)
                     .addComponent(btnCrearPost))
-                .addContainerGap(11, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         btnMenuPrincipañ.setText("Inicio");
+        btnMenuPrincipañ.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMenuPrincipañActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -134,6 +143,10 @@ public class RegistroPost extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnMenuPrincipañActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuPrincipañActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnMenuPrincipañActionPerformed
 
     /**
      * @param args the command line arguments

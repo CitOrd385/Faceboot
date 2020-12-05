@@ -265,7 +265,8 @@ public class PerfilUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEliminarMusicaActionPerformed
 
     private void btnInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInicioActionPerformed
-        // TODO add your handling code here:
+        MuroPosts muroPosts = new MuroPosts();
+        muroPosts.setVisible(true);
     }//GEN-LAST:event_btnInicioActionPerformed
 
     /**

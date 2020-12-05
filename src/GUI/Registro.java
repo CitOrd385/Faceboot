@@ -319,7 +319,8 @@ public class Registro extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAgregarGenPelisActionPerformed
 
     private void btnInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInicioActionPerformed
-        // TODO add your handling code here:
+        InicioSesion iS = new InicioSesion();
+        iS.setVisible(true);
     }//GEN-LAST:event_btnInicioActionPerformed
 
     private void btnAgregarGenMusicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarGenMusicaActionPerformed
@@ -329,8 +330,8 @@ public class Registro extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAgregarGenMusicaActionPerformed
 
     private void btnRegistrarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarUsuarioActionPerformed
-        MuroPosts muroPosts = new MuroPosts();
-        muroPosts.setVisible(true);
+        Registro registro = new Registro();
+        registro.setVisible(true);
     }//GEN-LAST:event_btnRegistrarUsuarioActionPerformed
 
     /**
