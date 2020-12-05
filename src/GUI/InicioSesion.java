@@ -8,6 +8,7 @@ package GUI;
 import DAO.UsuarioDAO;
 import ObjetosNegocio.Usuario;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -39,7 +40,7 @@ public class InicioSesion extends javax.swing.JFrame {
         btnIniciarSesion = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         btnCrearCuenta = new javax.swing.JButton();
-        txtPswrdContraseña = new javax.swing.JPasswordField();
+        txtPass = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Inicio sesión Faceboot");
@@ -80,6 +81,11 @@ public class InicioSesion extends javax.swing.JFrame {
         });
 
         btnIniciarSesion.setText("Iniciar sesión");
+        btnIniciarSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIniciarSesionActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("¿No tiene cuenta? Regístrese aquí.");
 
@@ -87,12 +93,6 @@ public class InicioSesion extends javax.swing.JFrame {
         btnCrearCuenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCrearCuentaActionPerformed(evt);
-            }
-        });
-
-        txtPswrdContraseña.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPswrdContraseñaActionPerformed(evt);
             }
         });
 
@@ -109,7 +109,7 @@ public class InicioSesion extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
-                    .addComponent(txtPswrdContraseña))
+                    .addComponent(txtPass))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(127, Short.MAX_VALUE)
@@ -134,7 +134,7 @@ public class InicioSesion extends javax.swing.JFrame {
                 .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblUsername)
-                    .addComponent(txtPswrdContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
                 .addComponent(btnIniciarSesion)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
@@ -156,9 +156,18 @@ public class InicioSesion extends javax.swing.JFrame {
         registro.setVisible(true);
     }//GEN-LAST:event_btnCrearCuentaActionPerformed
 
-    private void txtPswrdContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPswrdContraseñaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPswrdContraseñaActionPerformed
+    private void btnIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesionActionPerformed
+        if (usuarioValido(this.txtUsername.getText()) &&
+                passwordCorrecto(this.txtUsername.getText(), this.txtPass.getText())) {
+            this.dispose();
+            Usuario usu = this.cargarUsuarios(this.txtUsername.getText());
+            MuroPosts mP = new MuroPosts(usu);
+            mP.setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(this, "El usuario o la contraseña son incorrectos", 
+                    "Error al querer ingresar", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_btnIniciarSesionActionPerformed
 
     private Usuario cargarUsuarios(String usuario){
         ArrayList<Usuario> listaUsuarios = this.udao.buscarUsuarios();
@@ -168,6 +177,16 @@ public class InicioSesion extends javax.swing.JFrame {
             }
         }
         return null;
+    }
+    
+    private boolean usuarioValido(String usuario){
+        ArrayList<Usuario> listaUsuarios = this.udao.buscarUsuarios();
+        for (Usuario user : listaUsuarios) {
+            if (user.getNombre().equalsIgnoreCase(usuario)) {
+                return true;
+            }
+        }
+        return false;
     }
     
     private boolean passwordCorrecto(String usuario, String password){
@@ -181,6 +200,7 @@ public class InicioSesion extends javax.swing.JFrame {
         }
         return false;
     }
+    
     
     
     
@@ -224,7 +244,7 @@ public class InicioSesion extends javax.swing.JFrame {
     private javax.swing.JLabel lblUsername;
     private javax.swing.JLabel lblUsername1;
     private javax.swing.JPanel panelTitulo;
-    private javax.swing.JPasswordField txtPswrdContraseña;
+    private javax.swing.JTextField txtPass;
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
 }

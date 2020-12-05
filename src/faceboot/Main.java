@@ -8,6 +8,7 @@ package faceboot;
 //import DAO.ComentarioDAO;
 import DAO.PublicacionDAO;
 import DAO.UsuarioDAO;
+import GUI.InicioSesion;
 
 import ObjetosNegocio.Publicacion;
 import ObjetosNegocio.Usuario;
@@ -129,6 +130,9 @@ public class Main {
 //    ComentarioDAO cdao= new ComentarioDAO();
 //       cdao.agregar(comentario);
 //        System.out.println(comentario);
+
+        InicioSesion iS = new InicioSesion();
+        iS.setVisible(true);
     }
     
 }

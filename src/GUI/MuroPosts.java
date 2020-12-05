@@ -21,7 +21,7 @@ public class MuroPosts extends javax.swing.JFrame {
     }
     
     public MuroPosts(Usuario user){
-        
+        initComponents();
     }
 
     /**

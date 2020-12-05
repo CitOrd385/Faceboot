@@ -1,4 +1,4 @@
-/*
+        /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -45,6 +45,15 @@ public class UsuarioDAO extends BaseDAO<Usuario> {
         return listaUsuarios;
     }
     
+    public ArrayList<Usuario> buscarUsuarios(){
+        MongoCollection<Usuario> coleccion = this.getCollection();
+        FindIterable<Usuario> usuarios = coleccion.find();
+        ArrayList<Usuario> listaUsuarios = new ArrayList<>();
+        for (Usuario usuario : usuarios) {
+            listaUsuarios.add(usuario);
+        }
+        return listaUsuarios;   
+    }
     
     public Usuario consularporId(ObjectId id) {
         MongoCollection<Usuario> coleccion = this.getCollection();
