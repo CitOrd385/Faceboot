@@ -21,6 +21,7 @@ public class Comentario {
     }
 
     public Comentario(Usuario usuario, LocalDateTime fechaHora, String mensaje) {
+        this.id= id;
         this.usuario = usuario;
         this.fechaHora = fechaHora;
         this.mensaje = mensaje;
@@ -88,6 +89,11 @@ public class Comentario {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Comentario: " + "usuario: " + usuario.getNombre() + ", fechaHora: " + fechaHora + ", mensaje: " + mensaje + "";
     }
     
     

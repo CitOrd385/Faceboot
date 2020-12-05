@@ -5,6 +5,8 @@
  */
 package GUI;
 
+import ObjetosNegocio.Usuario;
+
 /**
  *
  * @author Citlali Orduño
@@ -16,6 +18,10 @@ public class MuroPosts extends javax.swing.JFrame {
      */
     public MuroPosts() {
         initComponents();
+    }
+    
+    public MuroPosts(Usuario user){
+        
     }
 
     /**

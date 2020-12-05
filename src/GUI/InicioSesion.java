@@ -5,12 +5,16 @@
  */
 package GUI;
 
+import DAO.UsuarioDAO;
+import ObjetosNegocio.Usuario;
+import java.util.ArrayList;
+
 /**
  *
  * @author Citlali Orduño
  */
 public class InicioSesion extends javax.swing.JFrame {
-
+        private UsuarioDAO udao= new UsuarioDAO();
     /**
      * Creates new form InicioSesion
      */
@@ -156,9 +160,30 @@ public class InicioSesion extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPswrdContraseñaActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private Usuario cargarUsuarios(String usuario){
+        ArrayList<Usuario> listaUsuarios = this.udao.buscarUsuarios();
+        for (Usuario user : listaUsuarios) {
+            if (user.getNombre().equalsIgnoreCase(usuario)) {
+                return user;
+            }
+        }
+        return null;
+    }
+    
+    private boolean passwordCorrecto(String usuario, String password){
+        ArrayList<Usuario> listaUsuarios = this.udao.buscarUsuarios();
+        for (Usuario user : listaUsuarios) {
+            if (user.getNombre().equalsIgnoreCase(usuario)) {
+                if (user.getContraseña().equalsIgnoreCase(password)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    
+    
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

@@ -51,6 +51,7 @@ public class Usuario {
         this.id = id;
         this.nombre = nombre;
         this.contraseña = contraseña;
+        this.correoElectronico= correoElectronico;
         this.edad = edad;
         this.sexo = sexo;
         this.fechaNacimiento = fechaNacimiento;
@@ -161,11 +162,9 @@ public class Usuario {
 
     @Override
     public String toString() {
-        return "Usuario{" + "nombre=" + nombre + ", contrase\u00f1a=" +
-                contraseña + ", correoElectronico=" + correoElectronico + 
-                ", edad=" + edad + ", sexo=" + sexo + ", fechaNacimiento=" + fechaNacimiento + 
-                ", generosPeliculas=" + generosPeliculas + ", generosMusica=" + generosMusica +'}';
+        return "Usuario " + "nombre:" + nombre + ", contrasenia: " + contraseña 
+                + ", correoElectronico: " + correoElectronico + '}';
     }
-    
+
     
 }

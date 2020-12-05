@@ -11,6 +11,7 @@ package GUI;
  */
 public class RegistroPost extends javax.swing.JFrame {
 
+    //En la parte que se vaya a crear el post llamarás el constructor con Id y lo vas a setear desde aquí el idObject
     /**
      * Creates new form CreaciónPosts
      */

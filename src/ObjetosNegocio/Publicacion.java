@@ -25,6 +25,13 @@ public class Publicacion {
     public Publicacion() {
     }
 
+    public Publicacion(Usuario autor, LocalDateTime fechaHora, String mensaje, List<String> etiquetas) {
+        this.autor = autor;
+        this.fechaHora = fechaHora;
+        this.mensaje = mensaje;
+        this.etiquetas = etiquetas;
+    }
+
     public Publicacion(Usuario usuario, LocalDateTime fechaHora, String mensaje, List<String> etiquetas, List<Comentario> comentarios) {
         this.autor = usuario;
         this.fechaHora = fechaHora;
@@ -114,7 +121,15 @@ public class Publicacion {
         }
         return true;
     }
- 
+
+    @Override
+    public String toString() {
+        return "Publicacion{" +" autor: n/" + autor.getNombre() + ", fechaHora: n/" + fechaHora 
+                + ", mensaje: n/" + mensaje + ", etiquetas: n/" + etiquetas + ", comentarios: n/" + comentarios + '}';
+    }
+
+    
+  
     
     
 }

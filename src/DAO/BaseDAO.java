@@ -11,6 +11,7 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import java.util.ArrayList;
 import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
 import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 import org.bson.codecs.configuration.CodecRegistry;
@@ -51,5 +52,7 @@ public abstract class BaseDAO<T> {
     protected abstract MongoCollection<T> getCollection();
     public abstract void agregar(T entidad);
     public abstract void eliminar(T entidad);
+    public abstract void actualizar(T entidad);
+    public abstract ArrayList<T> consultar();
     
 }

@@ -5,15 +5,21 @@
  */
 package faceboot;
 
+//import DAO.ComentarioDAO;
+import DAO.PublicacionDAO;
 import DAO.UsuarioDAO;
+
+import ObjetosNegocio.Publicacion;
 import ObjetosNegocio.Usuario;
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import org.bson.Document;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -35,23 +41,19 @@ public class Main {
        //Acceso a la colección que se desee modificar
        MongoCollection<Document> coleccion = bd.getCollection("usuarios");
        
-       LocalDate fechaNacimiento= LocalDate.of(1999, 02, 02);
-       Document documento= new Document();
-       documento.append("nombre","el joel lokillo").
-                 append("contraseña","lokillojoel").
-                 append("sexo", "hombre").
-               append("fechaNacimiento",fechaNacimiento);
+       LocalDate fechaNacimiento= LocalDate.of(1998, 07, 16);
+       
        
       // coleccion.insertOne(documento);
      
       
         List<String> generosMusica= new ArrayList<>();
-        generosMusica.add("Trash metal");
-        generosMusica.add("Heavy metal");
-        generosMusica.add("Rock psicodelico");
+        generosMusica.add("baladas");
+        generosMusica.add("power metal");
+        generosMusica.add("regueton");
         
         List<String> generosPeliculas= new ArrayList<>();
-        generosPeliculas.add("Terror");
+        generosPeliculas.add("Romance");
         generosPeliculas.add("Misterio");
         generosPeliculas.add("Accion");
         
@@ -64,23 +66,69 @@ public class Main {
        usuario.setGenerosMusica(generosMusica);
        usuario.setGenerosPeliculas(generosPeliculas);
      
+       Usuario user2= new Usuario();
+       user2.setNombre("Joel");
+       user2.setCorreoElectronico("joellokillo@gmail.com");
+       user2.setContraseña("joelMoon");
+       user2.setSexo("hombre");
+       user2.setFechaNacimiento(fechaNacimiento);
+       user2.setGenerosMusica(generosMusica);
+       user2.setGenerosPeliculas(generosPeliculas);
        
+//       
        UsuarioDAO udao= new UsuarioDAO();
+       ObjectId idUs= new ObjectId("5fca7146e2c3f0732c995cb8");
+      // udao.consularporId(idUs);
        
-       
+      // udao.agregar(user2);
+//       ArrayList<Usuario> usuarios= udao.consultar();
+//       
+//        for (Usuario usuario : usuarios) {
+//            System.out.println(usuario);
+//        }
        //udao.agregar(usuario);
+//       String correo= usuario.getCorreoElectronico();
+//       String contrasenia= usuario.getContraseña();
        
-       List<String> generosMusicales= udao.consultarGenerosPeliculas(usuario);
-       
-        for (String generosMusic : generosMusicales) {
-            System.out.println(generosMusic);
-        }
+       //udao.consultarCorreo(correo, contrasenia);
        //udao.consultarGenerosMusicales(usuario);
        
        // System.out.println(usuario.getEdad());
        
-       
-       
+    //-------------------------------------- Cale de las publicaciones --------------------------------------------------------------------------------  
+    LocalDateTime fechaHora= LocalDateTime.now();
+    Usuario autor= user2;
+    String mensaje= "Que perro frío está haciendo pero no tanto como el de su fría indiferencia";
+    
+     List<String> etiquetas= new ArrayList<>();
+     etiquetas.add("Desamor");
+     etiquetas.add("DolidoOn");
+    
+    Publicacion publicacion = new Publicacion(autor, fechaHora, mensaje, etiquetas);
+    
+    PublicacionDAO pdao= new PublicacionDAO();
+    
+    ObjectId id= new ObjectId();
+   // pdao.consularporId(id);
+   
+   //pdao.eliminar(publicacion);
+    
+    //pdao.agregar(publicacion);
+    
+    
+    
+    //---------------------------Cale de los comentarios (Sigue pendiente)-------------------------------------------------------------------------------
+   
+//    String respuesta="Sin Yolanda, Maricarmen";
+//    Comentario comentario= new Comentario();
+//    comentario.setId(id);
+//    comentario.setFechaHora(fechaHora);
+//    comentario.setUsuario(usuario);
+//    comentario.setMensaje(respuesta);
+//    
+//    ComentarioDAO cdao= new ComentarioDAO();
+//       cdao.agregar(comentario);
+//        System.out.println(comentario);
     }
     
 }

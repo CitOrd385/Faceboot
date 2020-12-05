@@ -21,14 +21,13 @@ import org.bson.types.ObjectId;
  *
  * @author Citlali Orduño
  */
-public class PublicacionDAO extends BaseDAO<Publicacion>{
+public class PublicacionDAO extends BaseDAO<Publicacion> {
 
     @Override
     protected MongoCollection<Publicacion> getCollection() {
         MongoDatabase baseDatos = this.getDatabase();
-        MongoCollection<Publicacion> coleccion = baseDatos.getCollection("publicaciones",Publicacion.class);
-        
-        //Esto es un comentario de cale, para que salga github
+        MongoCollection<Publicacion> coleccion = baseDatos.getCollection("publicaciones", Publicacion.class);
+
         return coleccion;
     }
 
@@ -38,58 +37,88 @@ public class PublicacionDAO extends BaseDAO<Publicacion>{
         coleccion.insertOne(publicacion);
     }
 
- 
-    public Publicacion consularporId(ObjectId id) {
-         MongoCollection coleccion = this.getCollection();
-        Document filtroId = new Document();
-        filtroId.append("_id", id);
-        Document publicacion = (Document) coleccion.find(filtroId).first();
-        if (publicacion != null) {
-            System.out.println(publicacion);
-            
+    @Override
+    public ArrayList<Publicacion> consultar() {
+        MongoCollection coleccion = this.getCollection();
+
+        FindIterable<Publicacion> publicaciones = coleccion.find();
+        ArrayList<Publicacion> listaPublicaciones = new ArrayList<>();
+
+        for (Publicacion listapubs : publicaciones) {
+            listaPublicaciones.add(listapubs);
         }
-        else{
-            System.out.println("No se encontro el usuario");
-        }
-        return  null;
+        return listaPublicaciones;
     }
 
     @Override
     public void eliminar(Publicacion publicacion) {
         MongoCollection coleccion = this.getCollection();
-        Document searchDocument = new Document("_id", publicacion.getId());
-        coleccion.findOneAndDelete(searchDocument);
+         coleccion.deleteOne(new Document("_id", publicacion.getId()));
     }
-    
-    public void agregarComentario(Comentario comentario, Publicacion publicacion){
-        MongoDatabase baseDatos = this.getDatabase();
-        MongoCollection<Publicacion> publicaciones= baseDatos.getCollection("publicaciones",Publicacion.class);
-        
-        ObjectId idPublicacion = publicacion.getId();
-        publicaciones.updateOne(new Document("_id", idPublicacion), Updates.push("comentarios", comentario));
-    }
-    
-    
-    public List<Publicacion> buscarPorTag(String tag){
-        MongoCollection coleccion= this.getCollection();
-        FindIterable<Publicacion> publicaciones= coleccion.find(eq("tags",tag));
-        
-        List<Publicacion> listaPublicaciones= new ArrayList<>();
-        
-        for (Publicacion listaPubs : listaPublicaciones) {
-         listaPublicaciones.add(listaPubs);
+
+    public List<Publicacion> buscarPorTag(String tag) {
+        MongoCollection coleccion = this.getCollection();
+        FindIterable<Publicacion> publicaciones = coleccion.find(eq("tags", tag));
+
+        List<Publicacion> listaPublicaciones = new ArrayList<>();
+
+        for (Publicacion listaPubs : publicaciones) {
+            listaPublicaciones.add(listaPubs);
         }
         return listaPublicaciones;
     }
-    
-    public void eliminarComentario(Publicacion pub, Comentario comentario){
-        MongoCollection coleccion= this.getCollection();
-        Document filtro= new Document();
-        filtro.append("_id", pub.getId());
-        Document actualiza= new Document();
-        actualiza.append("comentarios",comentario);
-        
-        coleccion.updateOne(filtro, actualiza);
-                
+
+    //ya esta corregido
+    public Publicacion consularporId(ObjectId id) {
+        MongoCollection<Publicacion> coleccion = this.getCollection();
+        Publicacion publicacion= coleccion.find(eq("_id",id)).first();
+        if(publicacion != null){
+            System.out.println(publicacion);
+            System.out.println("Si entró uauaua");
+            return publicacion;
+        }else{
+            System.out.println("Ponte a llorar, no entró al if JAJAA");
+            return null;
+        }
     }
+
+    @Override
+    public void actualizar(Publicacion publicacion) {
+        MongoCollection coleccion = this.getCollection();
+        Document searchDoc = new Document("_id",publicacion.getId());
+        Document updateDoc = new Document();
+        
+        updateDoc.append("mensaje",publicacion.getMensaje());
+        updateDoc.append("comentarios", publicacion.getComentarios());
+        
+        Document setDoc = new Document();
+        setDoc.append("$set", updateDoc);
+        
+        coleccion.updateOne(searchDoc, setDoc);
+    }
+    
+   public void agregarComentario(Publicacion publicacion, Comentario comentario){
+        MongoCollection<Publicacion> coleccion = this.getCollection();
+        
+        ObjectId idPub= publicacion.getId();
+        Document searchDoc= new Document("_id", idPub);
+        
+        coleccion.updateOne(searchDoc, Updates.push("comentarios", comentario));
+   }
+   
+   public void eliminarComentario(Publicacion publicacion, Comentario comentario){
+        MongoCollection<Publicacion> coleccion = this.getCollection();
+        
+        Document searchDoc= new Document("_id", publicacion.getId());
+        Document comentDoc= new Document("comentarios", comentario);
+        Document updateDoc = new Document("$pull", comentDoc);
+        
+        coleccion.updateOne(searchDoc, updateDoc);
+   }
+   
+   
+   public List<Comentario> consultarComentario(Publicacion publicacion){
+       return publicacion.getComentarios();
+   }
+    
 }

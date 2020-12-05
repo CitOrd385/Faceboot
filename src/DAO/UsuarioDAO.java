@@ -34,25 +34,34 @@ public class UsuarioDAO extends BaseDAO<Usuario> {
         coleccion.insertOne(usuario);
     }
 
-
+    @Override
+    public ArrayList<Usuario> consultar() {
+         MongoCollection coleccion = this.getCollection();
+         FindIterable<Usuario> usuarios = coleccion.find();
+         ArrayList<Usuario> listaUsuarios = new ArrayList<>();
+         for (Usuario listaUsuario : usuarios) {
+            listaUsuarios.add(listaUsuario);
+        }
+        return listaUsuarios;
+    }
+    
+    
     public Usuario consularporId(ObjectId id) {
         MongoCollection<Usuario> coleccion = this.getCollection();
-        Document filtroId = new Document();
-        filtroId.append("_id", id);
-
-        Usuario usuario= coleccion.find(eq("_id", filtroId)).first();
-        if (usuario != null) {
+        Usuario usuario= coleccion.find(eq("_id",id)).first();
+        if(usuario != null){
             System.out.println(usuario);
-         return usuario;
+            System.out.println("Si entró uauaua");
+            return usuario;
+        }else{
+            System.out.println("Ponte a llorar, no entró al if JAJAA");
+            return null;
         }
-        else{
-            System.out.println("No se encontro el usuario");
-        }
-        return  null;
     }
 
+    @Override
     public void actualizar(Usuario usuario) {
-         MongoCollection coleccion = this.getCollection();
+        MongoCollection coleccion = this.getCollection();
  
         Document searchDoc = new Document("_id",usuario.getId());
         Document updateDoc = new Document();
@@ -66,7 +75,7 @@ public class UsuarioDAO extends BaseDAO<Usuario> {
         
         coleccion.updateOne(searchDoc, setDoc);
     }
-
+    
     @Override
     public void eliminar(Usuario usuario) {
         MongoCollection coleccion = this.getCollection();
@@ -74,30 +83,25 @@ public class UsuarioDAO extends BaseDAO<Usuario> {
         coleccion.findOneAndDelete(searchDocument);
     }
     
-    public Usuario consultarCorreo(Usuario usuario){
-        MongoCollection<Usuario> coleccion = this.getCollection();
-        Document filtroCorreo = new Document(); 
-        filtroCorreo.append("correoElectronico", usuario.getCorreoElectronico());
-        FindIterable<Usuario> usuarios= coleccion.find(filtroCorreo);
-       if(usuarios != null){
-           for (Usuario documento : usuarios) {
-               System.out.println(documento);
-           }
-           return usuario;
-       }else{
-           System.out.println("Pura madre se agregó");
-           return null;
-       }
+    public Usuario consultarCorreo(String correo, String contrasenia){
+       Usuario usuario= null;
+       MongoCollection<Usuario> coleccion = this.getCollection();
+       Document filtroCorreoContrasenia= new Document();
+       filtroCorreoContrasenia.append("correoElectronico", correo)
+                              .append("contraseña", contrasenia);
+       usuario= coleccion.find(filtroCorreoContrasenia).first();
+        System.out.println(usuario);
+       return usuario;
     }
     
-    public List<String> consultarGenerosMusicales(Usuario usuario){
-        MongoCollection coleccion = this.getCollection();
+    public List<String> mostrarGenerosMusicales(Usuario usuario){
        return usuario.getGenerosMusica();
     }
     
-    public List<String> consultarGenerosPeliculas(Usuario usuario){
-        MongoCollection coleccion = this.getCollection();
+    public List<String> mostrarGenerosPeliculas(Usuario usuario){
         return usuario.getGenerosPeliculas();
 
     }
+
+    
 }
