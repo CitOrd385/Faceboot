@@ -17,7 +17,6 @@ public class Usuario {
     private ObjectId id;
     private String nombre;
     private String contraseña;
-    private String correoElectronico;
     private int edad;
     private String sexo;
     private LocalDate fechaNacimiento;
@@ -29,12 +28,10 @@ public class Usuario {
     }
 
     //constructor que recibe en sus parametros todos los atributos pero no el id de usuario
-    public Usuario(String nombre, String correoElentronico, String contraseña, 
-            String sexo,LocalDate fechaNacimiento, List<String> generosPeliculas, 
-            List<String> generosMusica) {
+    public Usuario(String nombre, String contraseña, String sexo,LocalDate fechaNacimiento,
+            List<String> generosPeliculas, List<String> generosMusica) {
         this.nombre = nombre;
         this.contraseña = contraseña;
-        this.correoElectronico= correoElectronico;
         this.edad = edad;
         this.sexo = sexo;
         this.fechaNacimiento = fechaNacimiento;
@@ -45,13 +42,11 @@ public class Usuario {
 
     
 //Constructor que recibe todos los atributos del usuario
-    public Usuario(ObjectId id, String nombre, String correoElectronico, String contraseña,
-            int edad, String sexo, LocalDate fechaNacimiento, List<String> generosPeliculas, 
-            List<String> generosMusica) {
+    public Usuario(ObjectId id, String nombre, String contraseña,int edad, String sexo,
+            LocalDate fechaNacimiento, List<String> generosPeliculas, List<String> generosMusica) {
         this.id = id;
         this.nombre = nombre;
         this.contraseña = contraseña;
-        this.correoElectronico= correoElectronico;
         this.edad = edad;
         this.sexo = sexo;
         this.fechaNacimiento = fechaNacimiento;
@@ -79,15 +74,7 @@ public class Usuario {
     public String getContraseña() {
         return contraseña;
     }
-
-    public String getCorreoElectronico() {
-        return correoElectronico;
-    }
-
-    public void setCorreoElectronico(String correoElectronico) {
-        this.correoElectronico = correoElectronico;
-    }
- 
+    
     public void setContraseña(String contraseña) {
         this.contraseña = contraseña;
     }
@@ -162,8 +149,7 @@ public class Usuario {
 
     @Override
     public String toString() {
-        return "Usuario " + "nombre:" + nombre + ", contrasenia: " + contraseña 
-                + ", correoElectronico: " + correoElectronico + '}';
+        return "nombre:" + nombre + " contrasenia: " + contraseña + "";
     }
 
     

@@ -112,5 +112,6 @@ public class UsuarioDAO extends BaseDAO<Usuario> {
 
     }
 
+   
     
 }

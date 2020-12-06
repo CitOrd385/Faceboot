@@ -6,15 +6,35 @@
 
 package GUI;
 
+import DAO.UsuarioDAO;
+import ObjetosNegocio.Usuario;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+
 /**
  *
  * @author Citlali Orduño
  */
 public class PerfilUsuario extends javax.swing.JFrame {
 
-    /** Creates new form PerfilUsuario */
+    private UsuarioDAO udao;
+    private Usuario usuario;
+    private List<String> generosMusicales;
+    private List<String> generosPeliculas;
+    
+    
     public PerfilUsuario() {
         initComponents();
+        setLocationRelativeTo(null);
+        setResizable(false);
+        this.usuario= usuario;
+        this.udao=  new UsuarioDAO();
+        this.generosMusicales= new ArrayList<>();
+        this.generosPeliculas=new ArrayList<>();
+        this.cargarInfoPersonal();
+        this.cargarComboMusica();
+        this.cargarComboPeliculas();
     }
 
     /** This method is called from within the constructor to
@@ -30,11 +50,9 @@ public class PerfilUsuario extends javax.swing.JFrame {
         lblFacebbot = new javax.swing.JLabel();
         panelInformacionPersonal = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txtNombre = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        txtContrasenia = new javax.swing.JTextField();
         panelGustos = new javax.swing.JPanel();
         txtGustosMusicales = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -78,8 +96,6 @@ public class PerfilUsuario extends javax.swing.JFrame {
 
         jLabel1.setText("Nombre: ");
 
-        jLabel2.setText("Correo Electrónico: ");
-
         jLabel3.setText("Contraseña:");
 
         javax.swing.GroupLayout panelInformacionPersonalLayout = new javax.swing.GroupLayout(panelInformacionPersonal);
@@ -87,19 +103,14 @@ public class PerfilUsuario extends javax.swing.JFrame {
         panelInformacionPersonalLayout.setHorizontalGroup(
             panelInformacionPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelInformacionPersonalLayout.createSequentialGroup()
-                .addGap(16, 16, 16)
+                .addGap(59, 59, 59)
                 .addGroup(panelInformacionPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelInformacionPersonalLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(panelInformacionPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING))))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelInformacionPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField1)
-                    .addComponent(jTextField3)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
+                    .addComponent(txtContrasenia))
                 .addContainerGap(26, Short.MAX_VALUE))
         );
         panelInformacionPersonalLayout.setVerticalGroup(
@@ -108,15 +119,11 @@ public class PerfilUsuario extends javax.swing.JFrame {
                 .addGap(56, 56, 56)
                 .addGroup(panelInformacionPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(panelInformacionPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29)
                 .addGroup(panelInformacionPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtContrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -125,6 +132,11 @@ public class PerfilUsuario extends javax.swing.JFrame {
         jLabel5.setText("Agrega o elimina tus gustos musicales.");
 
         btnAgregarMusica.setText("Agregar");
+        btnAgregarMusica.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarMusicaActionPerformed(evt);
+            }
+        });
 
         btnEliminarPeliculas.setText("Eliminar");
         btnEliminarPeliculas.addActionListener(new java.awt.event.ActionListener() {
@@ -138,6 +150,11 @@ public class PerfilUsuario extends javax.swing.JFrame {
         cmbGenerosMusicales.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         btnAgregarPeliculas1.setText("Agregar");
+        btnAgregarPeliculas1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarPeliculas1ActionPerformed(evt);
+            }
+        });
 
         btnEliminarMusica.setText("Eliminar");
         btnEliminarMusica.addActionListener(new java.awt.event.ActionListener() {
@@ -215,6 +232,11 @@ public class PerfilUsuario extends javax.swing.JFrame {
         });
 
         btnGuardarCambios.setText("Guardar cambios");
+        btnGuardarCambios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarCambiosActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -222,7 +244,7 @@ public class PerfilUsuario extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(panelTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
+                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnGuardarCambios)
@@ -230,9 +252,12 @@ public class PerfilUsuario extends javax.swing.JFrame {
                         .addComponent(btnInicio))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel4)
-                            .addComponent(panelInformacionPersonal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(27, 27, 27)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addGap(27, 27, 27))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(panelInformacionPersonal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(37, 37, 37)))
                         .addComponent(panelGustos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(35, Short.MAX_VALUE))
         );
@@ -269,9 +294,50 @@ public class PerfilUsuario extends javax.swing.JFrame {
         muroPosts.setVisible(true);
     }//GEN-LAST:event_btnInicioActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void btnGuardarCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarCambiosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnGuardarCambiosActionPerformed
+
+    private void btnAgregarMusicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarMusicaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAgregarMusicaActionPerformed
+
+    private void btnAgregarPeliculas1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarPeliculas1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAgregarPeliculas1ActionPerformed
+
+    
+    public void cargarInfoPersonal(){
+        txtNombre.setText(usuario.getNombre());
+        txtContrasenia.setText(usuario.getContraseña());
+    }
+    
+    public void cargarComboMusica(){
+        cmbGenerosPeliculas.removeAllItems();
+        DefaultComboBoxModel model = new DefaultComboBoxModel();
+        List<String> generos = udao.mostrarGenerosMusicales(usuario);
+        for (String genero : generos) {
+            model.addElement(genero);
+        }
+        this.cmbGenerosMusicales.setModel(model);
+    }
+    
+    public void cargarComboPeliculas(){
+        cmbGenerosPeliculas.removeAllItems();
+        DefaultComboBoxModel model = new DefaultComboBoxModel();
+        List<String> peliculas = udao.mostrarGenerosPeliculas(usuario);
+        for (String pelicula : peliculas) {
+            model.addElement(peliculas);
+        }
+        this.cmbGenerosPeliculas.setModel(model);
+    }
+    
+    
+    public void eliminarGenerosMusicales(){
+        
+    }
+    
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -314,20 +380,18 @@ public class PerfilUsuario extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cmbGenerosMusicales;
     private javax.swing.JComboBox<String> cmbGenerosPeliculas;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JLabel lblFacebbot;
     private javax.swing.JPanel panelGustos;
     private javax.swing.JPanel panelInformacionPersonal;
     private javax.swing.JPanel panelTitulo;
+    private javax.swing.JTextField txtContrasenia;
     private javax.swing.JTextField txtGenerosPeliculas;
     private javax.swing.JTextField txtGustosMusicales;
+    private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 
 }

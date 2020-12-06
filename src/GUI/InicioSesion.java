@@ -49,6 +49,7 @@ public class InicioSesion extends javax.swing.JFrame {
         panelTitulo.setBackground(new java.awt.Color(51, 51, 255));
 
         lblFacebbot.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        lblFacebbot.setForeground(new java.awt.Color(255, 255, 255));
         lblFacebbot.setText("Faceboot");
 
         javax.swing.GroupLayout panelTituloLayout = new javax.swing.GroupLayout(panelTitulo);
@@ -170,7 +171,7 @@ public class InicioSesion extends javax.swing.JFrame {
     }//GEN-LAST:event_btnIniciarSesionActionPerformed
 
     private Usuario cargarUsuarios(String usuario){
-        ArrayList<Usuario> listaUsuarios = this.udao.buscarUsuarios();
+        ArrayList<Usuario> listaUsuarios = this.udao.consultar();
         for (Usuario user : listaUsuarios) {
             if (user.getNombre().equalsIgnoreCase(usuario)) {
                 return user;
@@ -180,7 +181,7 @@ public class InicioSesion extends javax.swing.JFrame {
     }
     
     private boolean usuarioValido(String usuario){
-        ArrayList<Usuario> listaUsuarios = this.udao.buscarUsuarios();
+        ArrayList<Usuario> listaUsuarios = this.udao.consultar();
         for (Usuario user : listaUsuarios) {
             if (user.getNombre().equalsIgnoreCase(usuario)) {
                 return true;
@@ -190,7 +191,7 @@ public class InicioSesion extends javax.swing.JFrame {
     }
     
     private boolean passwordCorrecto(String usuario, String password){
-        ArrayList<Usuario> listaUsuarios = this.udao.buscarUsuarios();
+        ArrayList<Usuario> listaUsuarios = this.udao.consultar();
         for (Usuario user : listaUsuarios) {
             if (user.getNombre().equalsIgnoreCase(usuario)) {
                 if (user.getContraseña().equalsIgnoreCase(password)) {
