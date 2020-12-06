@@ -92,17 +92,6 @@ public class UsuarioDAO extends BaseDAO<Usuario> {
         coleccion.findOneAndDelete(searchDocument);
     }
     
-    public Usuario consultarCorreo(String correo, String contrasenia){
-       Usuario usuario= null;
-       MongoCollection<Usuario> coleccion = this.getCollection();
-       Document filtroCorreoContrasenia= new Document();
-       filtroCorreoContrasenia.append("correoElectronico", correo)
-                              .append("contraseña", contrasenia);
-       usuario= coleccion.find(filtroCorreoContrasenia).first();
-        System.out.println(usuario);
-       return usuario;
-    }
-    
     public List<String> mostrarGenerosMusicales(Usuario usuario){
        return usuario.getGenerosMusica();
     }
