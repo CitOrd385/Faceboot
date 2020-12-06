@@ -60,7 +60,7 @@ public class Main {
         
        Usuario usuario= new Usuario();
        usuario.setNombre("Marisol");
-       usuario.setCorreoElectronico("mari_solecito23@gmail.com");
+       
        usuario.setContraseña("solecito15");
        usuario.setSexo("mujer");
        usuario.setFechaNacimiento(fechaNacimiento);
@@ -69,7 +69,6 @@ public class Main {
      
        Usuario user2= new Usuario();
        user2.setNombre("Joel");
-       user2.setCorreoElectronico("joellokillo@gmail.com");
        user2.setContraseña("joelMoon");
        user2.setSexo("hombre");
        user2.setFechaNacimiento(fechaNacimiento);
